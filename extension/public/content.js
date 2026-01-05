@@ -127,12 +127,4 @@
 
   // Run check on load
   checkAndBlockSite();
-
-  // Listen for storage changes (when URLs are added/removed)
-  chrome.storage.onChanged.addListener((changes, namespace) => {
-    if (namespace === "sync" && changes.blockedUrls) {
-      // Reload the page to apply new rules
-      window.location.reload();
-    }
-  });
 })();

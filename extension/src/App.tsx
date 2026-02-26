@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 
 function App() {
   const [blockedUrls, setBlockedUrls] = useState<string[]>([]);
@@ -40,75 +39,66 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "20px", minWidth: "400px" }}>
-      <h1>Website Blocker</h1>
+    <div className="min-w-[360px] max-w-lg space-y-8 rounded-3xl bg-white/95 p-6 text-slate-900 shadow-2xl">
+      <header className="space-y-1">
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Website Blocker
+        </h1>
+        <p className="text-sm text-slate-500">
+          Add domains you want to keep off-limits and manage them in seconds.
+        </p>
+      </header>
 
-      <div style={{ marginBottom: "20px" }}>
-        <h2>Add URL to Block</h2>
-        <div style={{ display: "flex", gap: "10px" }}>
+      <section className="space-y-4 rounded-2xl border border-slate-100 bg-slate-50/70 p-4">
+        <h2 className="text-base font-semibold text-slate-800">
+          Add URL to block
+        </h2>
+        <div className="flex flex-col gap-3 sm:flex-row">
           <input
             type="text"
             value={urlInput}
             onChange={(e) => setUrlInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Enter URL (e.g., facebook.com)"
-            style={{
-              flex: 1,
-              padding: "8px",
-              fontSize: "14px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-            }}
+            className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
           />
           <button
+            type="button"
             onClick={addUrl}
-            style={{
-              padding: "8px 16px",
-              fontSize: "14px",
-              borderRadius: "4px",
-              backgroundColor: "#4CAF50",
-              color: "white",
-              border: "none",
-              cursor: "pointer",
-            }}
+            className="rounded-xl bg-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Add
           </button>
         </div>
-      </div>
+      </section>
 
-      <div>
-        <h2>Blocked URLs ({blockedUrls.length})</h2>
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-base font-semibold text-slate-800">
+            Blocked URLs
+          </h2>
+          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
+            {blockedUrls.length}
+          </span>
+        </div>
         {blockedUrls.length === 0 ? (
-          <p style={{ color: "#666" }}>No URLs blocked yet</p>
+          <p className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500">
+            No URLs blocked yet
+          </p>
         ) : (
-          <ul style={{ listStyle: "none", padding: 0 }}>
+          <ul className="space-y-3">
             {blockedUrls.map((url, index) => (
               <li
                 key={index}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "10px",
-                  marginBottom: "8px",
-                  backgroundColor: "#f5f5f5",
-                  borderRadius: "4px",
-                }}
+                className="flex items-center justify-between rounded-2xl border border-slate-100 bg-white px-4 py-3 text-sm shadow-sm"
               >
-                <span style={{ wordBreak: "break-all" }}>{url}</span>
+                <span className="break-all font-medium text-slate-700">
+                  {url}
+                </span>
                 <button
+                  type="button"
                   onClick={() => removeUrl(index)}
-                  style={{
-                    padding: "4px 12px",
-                    fontSize: "12px",
-                    borderRadius: "4px",
-                    backgroundColor: "#f44336",
-                    color: "white",
-                    border: "none",
-                    cursor: "pointer",
-                    marginLeft: "10px",
-                  }}
+                  className="ml-4 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-600 transition hover:bg-rose-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
                 >
                   Remove
                 </button>
@@ -116,7 +106,7 @@ function App() {
             ))}
           </ul>
         )}
-      </div>
+      </section>
     </div>
   );
 }
